@@ -128,6 +128,13 @@ public class TaskManager {
         }
     }
 
+    public void deleteSubtaskList(Subtask subtask) { //обновляет задачу в списке эпика
+        Subtask deleteSubtask = subtasks.get(subtask.getId());
+        Epic epic = epics.get(subtask.getEpicId());
+        epic.getSubtaskList().remove(deleteSubtask);
+        epic.addSubtask(subtask);
+    }
+
     public void deleteSubtaskById(int subtaskId) { //удаление подзадачи по идентификатору
         if (subtasks.containsKey(subtaskId)) {
             for (Integer id : subtasks.keySet()) {
@@ -137,13 +144,6 @@ public class TaskManager {
                 }
             }
         }
-    }
-
-    public void deleteSubtaskList(Subtask subtask) { //обновляет задачу в списке эпика
-        Subtask deleteSubtask = subtasks.get(subtask.getId());
-        Epic epic = epics.get(subtask.getEpicId());
-        epic.getSubtaskList().remove(deleteSubtask);
-        epic.addSubtask(subtask);
     }
 
     public void updateEpic(Epic epic) { //обновление эпика с очисткой хэшмап от его подзадач
