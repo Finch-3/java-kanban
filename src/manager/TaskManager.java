@@ -7,7 +7,6 @@ import task.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class TaskManager {
     private HashMap<Integer, Task> tasks;
@@ -47,9 +46,7 @@ public class TaskManager {
     }
 
     public void deleteTaskById(int taskId) { //удаление задачи по идентификатору
-        if (tasks.containsKey(taskId)) {
             tasks.remove(taskId);
-        }
     }
 
     public void addEpic(Epic epic) { //добавить эпик
@@ -140,10 +137,7 @@ public class TaskManager {
     }
 
     public ArrayList<Subtask> getSubtaskList(int epicId) { //возвращает список подзадач эпика по id
-        if (epics.containsKey(epicId) && !epics.get(epicId).getSubtaskList().isEmpty()) {
-            return epics.get(epicId).getSubtaskList();
-        }
-        return null;
+        return epics.get(epicId).getSubtaskList();
     }
 
     public Status updateStatus(Epic epic) { //обновление статуса эпика
