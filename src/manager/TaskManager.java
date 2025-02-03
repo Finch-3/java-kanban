@@ -46,7 +46,7 @@ public class TaskManager {
     }
 
     public void deleteTaskById(int taskId) { //удаление задачи по идентификатору
-            tasks.remove(taskId);
+        tasks.remove(taskId);
     }
 
     public void addEpic(Epic epic) { //добавить эпик
