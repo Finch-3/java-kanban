@@ -7,6 +7,7 @@ import task.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TaskManager {
     private HashMap<Integer, Task> tasks;
@@ -42,10 +43,7 @@ public class TaskManager {
     }
 
     public Task getTaskById(int taskId) { //возвращает задачу по идентификатору
-        if (tasks.containsKey(taskId)) {
-            return tasks.get(taskId);
-        }
-        return null;
+        return tasks.get(taskId);
     }
 
     public void deleteTaskById(int taskId) { //удаление задачи по идентификатору
@@ -66,17 +64,11 @@ public class TaskManager {
     }
 
     public Epic getEpicById(int epicId) { //возвращает эпик по идентификатору
-        if (epics.containsKey(epicId)) {
-            return epics.get(epicId);
-        }
-        return null;
+        return epics.get(epicId);
     }
 
     public Subtask getSubtaskById(int subtaskId) { //возвращает подзадачу по идентификатору
-        if (subtasks.containsKey(subtaskId)) {
-            return subtasks.get(subtaskId);
-        }
-        return null;
+        return subtasks.get(subtaskId);
     }
 
     public void clearSubtask() { // удаление всех подзадач
@@ -172,15 +164,15 @@ public class TaskManager {
         return Status.NEW;
     }
 
-    public HashMap<Integer, Task> getTasks() { //вернуть список задач
-        return tasks;
+    public ArrayList<Task> getTasks() { //вернуть список задач
+        return new ArrayList<>(tasks.values());
     }
 
-    public HashMap<Integer, Epic> getEpics() { //вернуть список эпиков
-        return epics;
+    public ArrayList<Epic> getEpics() { //вернуть список эпиков
+        return new ArrayList<>(epics.values());
     }
 
-    public HashMap<Integer, Subtask> getSubtasks() { //вернуть список подзадач
-        return subtasks;
+    public ArrayList<Subtask> getSubtasks() { //вернуть список подзадач
+        return new ArrayList<>(subtasks.values());
     }
 }
