@@ -14,11 +14,19 @@ public class Task {
         this.description = description;
     }
 
-    public Task(String name, String description, int id) { //конструктор обновления задачи
+    public Task(String name, String description, int id, Status status) { //конструктор обновления задачи
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.status = status;
+    }
+
+    public Task(String name, String description, int id) {
         this.name = name;
         this.description = description;
         this.id = id;
     }
+
 
     public int getId() {
         return id;

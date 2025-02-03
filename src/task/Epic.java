@@ -23,7 +23,6 @@ public class Epic extends task.Task {
         return subtaskList;
     }
 
-
     @Override
     public String toString() {
         return "Epic{" +

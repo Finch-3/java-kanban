@@ -1,3 +1,5 @@
+package manager;
+
 import task.Epic;
 import task.Status;
 import task.Subtask;
@@ -16,7 +18,7 @@ public class TaskManager {
         this.tasks = new HashMap<>();
         this.epics = new HashMap<>();
         this.subtasks = new HashMap<>();
-        this.id = 10000;
+        this.id = 1;
     }
 
     private int generateId() { //генератор ключей
@@ -31,36 +33,24 @@ public class TaskManager {
 
     public void updateTask(Task task) { //обновление задачи
         if (tasks.containsKey(task.getId())) {
-            task.setStatus(Status.IN_PROGRESS);
             tasks.put(task.getId(), task);
         }
     }
 
     public void clearTask() { //удаление всех задач
-        if (!tasks.isEmpty()) {
-            tasks.clear();
-        }
+        tasks.clear();
     }
 
     public Task getTaskById(int taskId) { //возвращает задачу по идентификатору
         if (tasks.containsKey(taskId)) {
-            for (Integer id : tasks.keySet()) {
-                if (id.equals(taskId)) {
-                    return tasks.get(taskId);
-                }
-            }
+            return tasks.get(taskId);
         }
         return null;
     }
 
     public void deleteTaskById(int taskId) { //удаление задачи по идентификатору
         if (tasks.containsKey(taskId)) {
-            for (Integer id : tasks.keySet()) {
-                if (id.equals(taskId)) {
-                    tasks.remove(taskId);
-                    break;
-                }
-            }
+            tasks.remove(taskId);
         }
     }
 
@@ -71,40 +61,29 @@ public class TaskManager {
     }
 
     public void clearEpics() { // удаление всех эпиков и подзадач
-        if (!epics.isEmpty()) {
-            epics.clear();
-            if (!subtasks.isEmpty()) {
-                subtasks.clear();
-            }
-        }
+        epics.clear();
+        subtasks.clear();
     }
 
     public Epic getEpicById(int epicId) { //возвращает эпик по идентификатору
         if (epics.containsKey(epicId)) {
-            for (Integer id : epics.keySet()) {
-                if (id.equals(epicId)) {
-                    return epics.get(epicId);
-                }
-            }
+            return epics.get(epicId);
         }
         return null;
     }
 
     public Subtask getSubtaskById(int subtaskId) { //возвращает подзадачу по идентификатору
         if (subtasks.containsKey(subtaskId)) {
-            for (Integer id : subtasks.keySet()) {
-                if (id.equals(subtaskId)) {
-                    return subtasks.get(subtaskId);
-                }
-            }
+            return subtasks.get(subtaskId);
         }
         return null;
     }
 
     public void clearSubtask() { // удаление всех подзадач
-        if (!subtasks.isEmpty()) {
-            subtasks.clear();
+        for (Epic value : epics.values()) {
+            value.getSubtaskList().clear();
         }
+        subtasks.clear();
     }
 
     public void addSubtask(Subtask subtask) { //добавить подзадачу в эпик
@@ -121,7 +100,6 @@ public class TaskManager {
     public void updateSubtask(Subtask subtask) { //обновление подзадачи
         if (subtasks.containsKey(subtask.getId())) {
             deleteSubtaskList(subtask);
-            subtask.setStatus(Status.IN_PROGRESS);
             subtasks.put(subtask.getId(), subtask);
             Epic epic = epics.get(subtask.getEpicId());
             epic.setStatus(updateStatus(epic));
@@ -137,12 +115,10 @@ public class TaskManager {
 
     public void deleteSubtaskById(int subtaskId) { //удаление подзадачи по идентификатору
         if (subtasks.containsKey(subtaskId)) {
-            for (Integer id : subtasks.keySet()) {
-                if (id.equals(subtaskId)) {
-                    subtasks.remove(subtaskId);
-                    break;
-                }
-            }
+            Subtask subtask = subtasks.get(subtaskId);
+            Epic epic = epics.get(subtask.getEpicId());
+            epic.getSubtaskList().remove(subtask);
+            subtasks.remove(subtaskId);
         }
     }
 
@@ -154,7 +130,7 @@ public class TaskManager {
                     subtasks.remove(subtask.getId());
                 }
             }
-            epic.setStatus(Status.NEW);
+            epic.setStatus(updateStatus(epic));
             epics.put(epic.getId(), epic);
         }
     }
@@ -167,17 +143,12 @@ public class TaskManager {
                     subtasks.remove(subtask.getId());
                 }
             }
-            for (Integer id : epics.keySet()) {
-                if (id.equals(epicId)) {
-                    epics.remove(epicId);
-                    break;
-                }
-            }
+            epics.remove(epicId);
         }
     }
 
     public ArrayList<Subtask> getSubtaskList(int epicId) { //возвращает список подзадач эпика по id
-        if (!epics.get(epicId).getSubtaskList().isEmpty()) {
+        if (epics.containsKey(epicId) && !epics.get(epicId).getSubtaskList().isEmpty()) {
             return epics.get(epicId).getSubtaskList();
         }
         return null;
