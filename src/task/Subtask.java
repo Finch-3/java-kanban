@@ -1,15 +1,19 @@
 package task;
 
 public class Subtask extends task.Task {
-    private final int epicId;
+    private int epicId;
 
-    public Subtask(String name, String description, int epicId) { //создание подзадачи
+    public Subtask(int epicId, String name, String description) { //создание подзадачи
         super(name, description);
         this.epicId = epicId;
     }
 
-    public Subtask(String name, String description, int epicId, int id, Status status) { //обновление подзадачи
-        super(name, description, id, status);
+    public Subtask(/*int epicId,*/ int id, String name, String description, Status status) { //обновление подзадачи
+        super(id, name, description, status);
+        this.epicId = 0;
+    }
+
+    public void setEpicId(int epicId) {
         this.epicId = epicId;
     }
 
