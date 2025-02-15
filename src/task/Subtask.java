@@ -8,7 +8,7 @@ public class Subtask extends task.Task {
         this.epicId = epicId;
     }
 
-    public Subtask(/*int epicId,*/ int id, String name, String description, Status status) { //обновление подзадачи
+    public Subtask(int id, String name, String description, Status status) { //обновление подзадачи
         super(id, name, description, status);
         this.epicId = 0;
     }

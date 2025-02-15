@@ -22,13 +22,6 @@ public class Task {
         this.status = status;
     }
 
-//    public Task(String name, String description, int id) {//удалить =========================================
-//        this.name = name;
-//        this.description = description;
-//        this.id = id;
-//    }
-
-
     public int getId() {
         return id;
     }
@@ -57,13 +50,12 @@ public class Task {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && status == task.status && Objects.equals(name, task.name)
-                && Objects.equals(description, task.description);
+        return id == task.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, name, description);
+        return Objects.hashCode(id);
     }
 
     @Override

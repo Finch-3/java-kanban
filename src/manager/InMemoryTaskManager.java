@@ -13,12 +13,14 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Epic> epics;
     private HashMap<Integer, Subtask> subtasks;
     private int id;
+    private HistoryManager historyManager;
 
     public InMemoryTaskManager() {
         this.tasks = new HashMap<>();
         this.epics = new HashMap<>();
         this.subtasks = new HashMap<>();
         this.id = 1;
+        this.historyManager = new InMemoryHistoryManager();
     }
 
     private int generateId() { //генератор ключей
@@ -45,6 +47,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTaskById(int taskId) { //возвращает задачу по идентификатору
+        historyManager.addTask(tasks.get(taskId));
         return tasks.get(taskId);
     }
 
@@ -81,11 +84,13 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Epic getEpicById(int epicId) { //возвращает эпик по идентификатору
+        historyManager.addTask(epics.get(epicId));
         return epics.get(epicId);
     }
 
     @Override
     public Subtask getSubtaskById(int subtaskId) { //возвращает подзадачу по идентификатору
+        historyManager.addTask(subtasks.get(subtaskId));
         return subtasks.get(subtaskId);
     }
 
@@ -170,6 +175,11 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
         return Status.NEW;
+    }
+
+    @Override
+    public ArrayList<Task> getHistory() {
+        return historyManager.getHistoryList();
     }
 
     @Override
