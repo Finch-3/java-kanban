@@ -24,5 +24,4 @@ public class InMemoryHistoryManager implements HistoryManager {
         return historyList;
     }
 
-
 }
