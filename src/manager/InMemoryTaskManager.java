@@ -12,15 +12,15 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Task> tasks;
     private HashMap<Integer, Epic> epics;
     private HashMap<Integer, Subtask> subtasks;
-    private int id;
     private HistoryManager historyManager;
+    private int id;
 
     public InMemoryTaskManager() {
         this.tasks = new HashMap<>();
         this.epics = new HashMap<>();
         this.subtasks = new HashMap<>();
-        this.id = 1;
         this.historyManager = new InMemoryHistoryManager();
+        this.id = 1;
     }
 
     private int generateId() { //генератор ключей
@@ -175,11 +175,6 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
         return Status.NEW;
-    }
-
-    @Override
-    public ArrayList<Task> getHistory() {
-        return historyManager.getHistoryList();
     }
 
     @Override

@@ -20,8 +20,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public ArrayList<Task> getHistoryList() {
+    public ArrayList<Task> getHistory() {
         return historyList;
     }
-
 }
