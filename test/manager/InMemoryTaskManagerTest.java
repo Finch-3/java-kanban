@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
-    TaskManager taskManager = new InMemoryTaskManager();
+    TaskManager taskManager = Manager.getDefault();
     @Test
     void addNewTask() {
         Task task = new Task("Задача", "Описание");

@@ -19,7 +19,7 @@ public class InMemoryTaskManager implements TaskManager {
         this.tasks = new HashMap<>();
         this.epics = new HashMap<>();
         this.subtasks = new HashMap<>();
-        this.historyManager = new InMemoryHistoryManager();
+        this.historyManager = Manager.getDefaultHistory();
         this.id = 1;
     }
 
@@ -175,6 +175,11 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
         return Status.NEW;
+    }
+
+    @Override
+    public ArrayList<Task> getHistory() {
+        return historyManager.getHistory();
     }
 
     @Override
