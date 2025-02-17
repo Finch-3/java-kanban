@@ -7,9 +7,9 @@ import task.Task;
 import java.util.ArrayList;
 
 public interface TaskManager {
-    void addTask(Task task);
+    int addTask(Task task);
 
-    void updateTask(Task task);
+    int updateTask(Task task);
 
     void clearTask();
 
@@ -17,9 +17,9 @@ public interface TaskManager {
 
     void deleteTaskById(int taskId);
 
-    void addEpic(Epic epic);
+    int addEpic(Epic epic);
 
-    void updateEpic(Epic epic);
+    int updateEpic(Epic epic);
 
     void clearEpics();
 
@@ -29,9 +29,9 @@ public interface TaskManager {
 
     void clearSubtask();
 
-    void addSubtask(Subtask subtask);
+    int addSubtask(Subtask subtask);
 
-    void updateSubtask(Subtask subtask);
+    int updateSubtask(Subtask subtask);
 
     void deleteSubtaskById(int subtaskId);
 

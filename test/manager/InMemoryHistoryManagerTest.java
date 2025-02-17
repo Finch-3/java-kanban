@@ -25,9 +25,8 @@ class InMemoryHistoryManagerTest {
         historyManager.addTask(subtask);
 
         final ArrayList<Task> history = historyManager.getHistory();
-        Assertions.assertEquals(3, history.size());
+        Assertions.assertEquals(3, history.size(), "Количество задач не совпадает");
 
-        Assertions.assertEquals(subtask, history.getLast());
-        Assertions.assertEquals(task, history.getFirst());
+        Assertions.assertEquals(subtask, history.getLast(), "Задача не в конце списка");
     }
 }

@@ -33,7 +33,7 @@ public class Main {
         Subtask subtask3 = new Subtask(epic3.getId(), "Подзадача 3", "Описание подзадачи 3");
         taskManager.addSubtask(subtask3);
 
-        System.out.println("Задачи:" );
+        System.out.println("Задачи:");
         for (Task value : taskManager.getTasks()) {
             System.out.println(value);
         }
@@ -47,7 +47,7 @@ public class Main {
 
         System.out.println();
 
-        System.out.println("Подзадачи: " );
+        System.out.println("Подзадачи: ");
         for (Subtask value : taskManager.getSubtasks()) {
             System.out.println(value);
         }
@@ -74,6 +74,18 @@ public class Main {
         for (Task task : taskManager.getHistory()) {
             System.out.println(task);
         }
+
+        for (Epic value : taskManager.getEpics()) {
+            System.out.println(value);
+        }
+
+        System.out.println("Обновление эпика 2: ");
+        Epic epic = new Epic(epic2.getId(), "Эпик 2 обновлен", "Задача эпика обновлена");
+
+        System.out.println(taskManager.getEpicById(epic2.getId()));
+        taskManager.updateEpic(epic);
+        System.out.println();
+        System.out.println(taskManager.getEpicById(epic2.getId()));
 
     }
 }
