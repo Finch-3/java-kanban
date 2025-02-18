@@ -7,11 +7,13 @@ import task.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InMemoryTaskManager implements TaskManager {
-    private HashMap<Integer, Task> tasks;
-    private HashMap<Integer, Epic> epics;
-    private HashMap<Integer, Subtask> subtasks;
+    private Map<Integer, Task> tasks;
+    private Map<Integer, Epic> epics;
+    private Map<Integer, Subtask> subtasks;
     private HistoryManager historyManager;
     private int id;
 
@@ -149,7 +151,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteEpicById(int epicId) { //удаление эпика по идентификатору
         if (epics.containsKey(epicId)) {
-            ArrayList<Subtask> subtasksList = epics.get(epicId).getSubtaskList();
+            List<Subtask> subtasksList = epics.get(epicId).getSubtaskList();
             if (!subtasksList.isEmpty()) {
                 for (Subtask subtask : subtasksList) {
                     subtasks.remove(subtask.getId());
@@ -160,13 +162,13 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Subtask> getSubtaskList(int epicId) { //возвращает список подзадач эпика по id
+    public List<Subtask> getSubtaskList(int epicId) { //возвращает список подзадач эпика по id
         return epics.get(epicId).getSubtaskList();
     }
 
     public Status updateStatus(Epic epic) { //обновление статуса эпика
         boolean flag = true;
-        ArrayList<Subtask> subtaskList = epic.getSubtaskList();
+        List<Subtask> subtaskList = epic.getSubtaskList();
         if (!subtaskList.isEmpty()) {
             for (Subtask subtask : subtaskList) {
                 if (subtask.getStatus().equals(Status.IN_PROGRESS)) {
@@ -183,22 +185,22 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getHistory() {
+    public List<Task> getHistory() {
         return historyManager.getHistory();
     }
 
     @Override
-    public ArrayList<Task> getTasks() { //вернуть список задач
+    public List<Task> getTasks() { //вернуть список задач
         return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public ArrayList<Epic> getEpics() { //вернуть список эпиков
+    public List<Epic> getEpics() { //вернуть список эпиков
         return new ArrayList<>(epics.values());
     }
 
     @Override
-    public ArrayList<Subtask> getSubtasks() { //вернуть список подзадач
+    public List<Subtask> getSubtasks() { //вернуть список подзадач
         return new ArrayList<>(subtasks.values());
     }
 }

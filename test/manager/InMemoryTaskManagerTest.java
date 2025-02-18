@@ -10,6 +10,7 @@ import task.Subtask;
 import task.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +30,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedTask, "Задача не найдена.");
         assertEquals(task, savedTask, "Задачи не совпадают.");
 
-        final ArrayList<Task> tasks = taskManager.getTasks();
+        final List<Task> tasks = taskManager.getTasks();
 
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
@@ -51,7 +52,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedTask, "Задача не найдена.");
         assertEquals(updateTask, savedTask, "Задачи не совпадают.");
 
-        final ArrayList<Task> tasks = taskManager.getTasks();
+        final List<Task> tasks = taskManager.getTasks();
 
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
@@ -71,7 +72,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedEpic, "Задача не найдена.");
         assertEquals(epic, savedEpic, "Задачи не совпадают.");
 
-        final ArrayList<Epic> epics = taskManager.getEpics();
+        final List<Epic> epics = taskManager.getEpics();
 
         assertNotNull(epics, "Задачи не возвращаются.");
         assertEquals(1, epics.size(), "Неверное количество задач.");
@@ -93,7 +94,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedEpic, "Задача не найдена.");
         assertEquals(updateEpic, savedEpic, "Задачи не совпадают.");
 
-        final ArrayList<Epic> epics = taskManager.getEpics();
+        final List<Epic> epics = taskManager.getEpics();
 
         assertNotNull(epics, "Задачи не возвращаются.");
         assertEquals(1, epics.size(), "Неверное количество задач.");
@@ -115,7 +116,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedSubtask, "Задача не найдена.");
         assertEquals(subtask, savedSubtask, "Задачи не совпадают.");
 
-        final ArrayList<Subtask> subtasks = taskManager.getSubtasks();
+        final List<Subtask> subtasks = taskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(1, subtasks.size(), "Неверное количество задач.");
@@ -139,7 +140,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedSubtask, "Задача не найдена.");
         assertEquals(updateSubtask, savedSubtask, "Задачи не совпадают.");
 
-        final ArrayList<Subtask> subtasks = taskManager.getSubtasks();
+        final List<Subtask> subtasks = taskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(1, subtasks.size(), "Неверное количество задач.");

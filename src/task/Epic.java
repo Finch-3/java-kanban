@@ -1,9 +1,10 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends task.Task {
-    private ArrayList<Subtask> subtaskList;
+    private List<Subtask> subtaskList;
 
     public Epic(String name, String description) { //создание эпика
         super(name, description);
@@ -19,7 +20,7 @@ public class Epic extends task.Task {
         subtaskList.add(subtask);
     }
 
-    public ArrayList<Subtask> getSubtaskList() {
+    public List<Subtask> getSubtaskList() {
         return subtaskList;
     }
 

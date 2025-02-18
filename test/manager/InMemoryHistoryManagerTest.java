@@ -6,9 +6,7 @@ import task.Epic;
 import task.Subtask;
 import task.Task;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.List;
 
 class InMemoryHistoryManagerTest {
 
@@ -24,7 +22,7 @@ class InMemoryHistoryManagerTest {
         historyManager.addTask(epic);
         historyManager.addTask(subtask);
 
-        final ArrayList<Task> history = historyManager.getHistory();
+        final List<Task> history = historyManager.getHistory();
         Assertions.assertEquals(3, history.size(), "Количество задач не совпадает");
 
         Assertions.assertEquals(subtask, history.getLast(), "Задача не в конце списка");
