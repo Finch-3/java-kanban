@@ -20,6 +20,10 @@ public class Epic extends task.Task {
         subtaskList.add(subtask);
     }
 
+    public void setSubtaskList(List<Subtask> subtaskList) {
+        this.subtaskList = subtaskList;
+    }
+
     public List<Subtask> getSubtaskList() {
         return subtaskList;
     }

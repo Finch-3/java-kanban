@@ -13,7 +13,7 @@ class InMemoryHistoryManagerTest {
     HistoryManager historyManager = Manager.getDefaultHistory();
 
     @Test
-    void addHistoryTaskEpicSubtask() {
+    void addHistoryTaskEpicSubtaskSize() {
         Task task = new Task("Задача", "Описание");
         Epic epic = new Epic("Задача", "Описание");
         Subtask subtask = new Subtask(epic.getId(), "Задача", "Описание");
@@ -26,5 +26,10 @@ class InMemoryHistoryManagerTest {
         Assertions.assertEquals(3, history.size(), "Количество задач не совпадает");
 
         Assertions.assertEquals(subtask, history.getLast(), "Задача не в конце списка");
+
+        for (int i = 0; i < 15; i++) {
+            historyManager.addTask(task);
+        }
+        Assertions.assertEquals(10, historyManager.getHistory().size(), "Список не равен десяти");
     }
 }

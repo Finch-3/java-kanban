@@ -69,11 +69,12 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public int updateEpic(Epic epic) { //обновление эпика, изменение имени и описания
+    public int updateEpic(Epic epic) { //обновление эпика
         if (epics.containsKey(epic.getId())) {
-            Epic epicUpdate = epics.get(epic.getId());
-            epicUpdate.setName(epic.getName());
-            epicUpdate.setDescription(epic.getDescription());
+            List<Subtask> subtaskList = epics.get(epic.getId()).getSubtaskList();
+            epic.setSubtaskList(subtaskList);
+            epic.setStatus(updateStatus(epic));
+            epics.put(epic.getId(), epic);
             return epic.getId();
         }
         return -1;
