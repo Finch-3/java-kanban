@@ -13,7 +13,7 @@ class InMemoryHistoryManagerTest {
     HistoryManager historyManager = Manager.getDefaultHistory();
 
     @Test
-    void addHistoryTaskEpicSubtaskSize() {
+    void addHistoryTaskEpicSubtaskAndMaxSize() {
         Task task = new Task("Задача", "Описание");
         Epic epic = new Epic("Задача", "Описание");
         Subtask subtask = new Subtask(epic.getId(), "Задача", "Описание");

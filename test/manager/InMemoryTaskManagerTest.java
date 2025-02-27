@@ -148,4 +148,41 @@ class InMemoryTaskManagerTest {
         assertEquals(0, epic.getSubtaskList().size(), "Неверное количество задач.");
     }
 
+    @Test
+    void addHistoryCopyObject() {
+        taskManager.addTask(task);
+        Subtask subtask = new Subtask(taskManager.addEpic(epic), "Подзадача", "Описание подзадачи");
+        taskManager.addSubtask(subtask);
+
+        taskManager.getTaskById(task.getId());
+        taskManager.getEpicById(epic.getId());
+        taskManager.getSubtaskById(subtask.getId());
+
+        assertEquals(3, taskManager.getHistory().size(), "Размер списка не 3");
+
+        Task updateTask = new Task(task.getId(), "Задача обновление",
+                "Описание обновление", Status.IN_PROGRESS);
+
+        Epic updateEpic = new Epic(epic.getId(), "Эпик обновление",
+                "Описание Эпик обновление");
+
+        Subtask updateSubtask = new Subtask(subtask.getId(), "Подзадача обновление",
+                "Описание Подзадача обновление", Status.IN_PROGRESS);
+
+        assertEquals(task.getName(), taskManager.getHistory().get(0).getName(), "Задачи не совпадают");
+        assertEquals(epic.getName(), taskManager.getHistory().get(1).getName(), "Задачи не совпадают");
+        assertEquals(subtask.getName(), taskManager.getHistory().get(2).getName(), "Задачи не совпадают");
+
+        taskManager.updateTask(updateTask);
+        taskManager.updateEpic(updateEpic);
+        taskManager.updateSubtask(updateSubtask);
+
+        assertNotEquals(taskManager.getTasks().get(0).getName(),
+                taskManager.getHistory().get(0).getName(), "Задачи совпадают");
+        assertNotEquals(taskManager.getEpics().get(0).getName(),
+                taskManager.getHistory().get(1).getName(), "Задачи совпадают");
+        assertNotEquals(taskManager.getSubtasks().get(0).getName(),
+                taskManager.getHistory().get(2).getName(), "Задачи совпадают");
+    }
+
 }
