@@ -6,8 +6,6 @@ import task.Epic;
 import task.Subtask;
 import task.Task;
 
-import java.util.List;
-
 class InMemoryHistoryManagerTest {
 
     TaskManager manager = Manager.getDefault();
