@@ -2,54 +2,86 @@ package manager;
 
 import task.Task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class InMemoryHistoryManager<E extends Task> implements HistoryManager {
+public class InMemoryHistoryManager implements HistoryManager {
 
-    private Map<Integer, Node<E>> historyMap;
-    private Node<E> head;
-    private Node<E> tail;
-    private int size;
+    private Map<Integer, Node> historyMap;
+    private Node head;
+    private Node tail;
+    private int size = 0;
 
     public InMemoryHistoryManager() {
         this.historyMap = new HashMap<>();
-        this.size = 0;
-    }
-
-
-
-    private List<Task> historyList;
-
-
-//    public InMemoryHistoryManager() {
-//        this.historyList = new ArrayList<>();
-//    }
-
-
-    @Override
-    public void remove(int id) {
-
     }
 
     @Override
     public void addTask(Task task) {
+        if (historyMap.containsKey(task.getId())) {
+            remove(task.getId());
+            historyMap.remove(task.getId());
+        }
+        linkLast(task);
+    }
 
+    public void linkLast(Task task) {
+        Node oldTail = tail;
+        Node newNode = new Node(oldTail, task, null);
+        tail = newNode;
+        if (oldTail == null) {
+            head = newNode;
+        } else {
+            oldTail.next = newNode;
+        }
+        size++;
+        historyMap.put(task.getId(), newNode);
+    }
+
+    public List<Task> getTasks() {
+        List<Task> list = new ArrayList<>();
+        if (head != null) {
+            Node value = head;
+            while (value.next != null) {
+                list.add(value.data);
+                value = value.next;
+            }
+            list.add(tail.data);
+        }
+        return list;
+    }
+
+    @Override
+    public void remove(int id) {
+        Node element = historyMap.get(id);
+        Node prev = element.prev;
+        Node next = element.next;
+
+        if (prev == null) {
+            head = next;
+        } else {
+            prev.next = next;
+            element.prev = null;
+        }
+        if (next == null) {
+            tail = prev;
+        } else {
+            next.prev = prev;
+            element.next = null;
+        }
+        size--;
     }
 
     @Override
     public List<Task> getHistory() {
-        return historyList;
+        return getTasks();
     }
 
-    private static class Node<E> {
-        private E data;
-        private Node<E> next;
-        private Node<E> prev;
+    private static class Node {
+        private Task data;
+        private Node next;
+        private Node prev;
 
-        public Node(Node<E> prev, E data, Node<E> next) {
+        public Node(Node prev, Task data, Node next) {
             this.prev = prev;
             this.data = data;
             this.next = next;
