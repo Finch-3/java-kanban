@@ -19,7 +19,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     public void addTask(Task task) {
         if (historyMap.containsKey(task.getId())) {
             remove(task.getId());
-            historyMap.remove(task.getId());
         }
         linkLast(task);
     }
@@ -69,6 +68,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             element.next = null;
         }
         size--;
+        historyMap.remove(id);
     }
 
     @Override

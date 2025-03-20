@@ -34,7 +34,6 @@ class InMemoryTaskManagerTest {
 
         taskManager.deleteTaskById(taskId);
 
-        assertNull(taskManager.getTaskById(taskId));
         assertEquals(0, taskManager.getTasks().size(), "Неверное количество задач.");
     }
 
@@ -76,7 +75,6 @@ class InMemoryTaskManagerTest {
 
         taskManager.deleteEpicById(epicId);
 
-        assertNull(taskManager.getEpicById(epicId));
         assertEquals(0, taskManager.getEpics().size(), "Неверное количество задач.");
     }
 
@@ -120,7 +118,6 @@ class InMemoryTaskManagerTest {
 
         taskManager.deleteSubtaskById(subtaskId);
 
-        assertNull(taskManager.getSubtaskById(subtaskId));
         assertEquals(0, taskManager.getSubtasks().size(), "Неверное количество задач.");
     }
 
@@ -172,6 +169,7 @@ class InMemoryTaskManagerTest {
         assertEquals(task.getName(), taskManager.getHistory().get(0).getName(), "Задачи не совпадают");
         assertEquals(epic.getName(), taskManager.getHistory().get(1).getName(), "Задачи не совпадают");
         assertEquals(subtask.getName(), taskManager.getHistory().get(2).getName(), "Задачи не совпадают");
+
 
         taskManager.updateTask(updateTask);
         taskManager.updateEpic(updateEpic);

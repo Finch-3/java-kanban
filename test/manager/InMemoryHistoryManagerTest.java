@@ -10,26 +10,36 @@ import java.util.List;
 
 class InMemoryHistoryManagerTest {
 
-    HistoryManager historyManager = Manager.getDefaultHistory();
+    TaskManager manager = Manager.getDefault();
 
     @Test
-    void addHistoryTaskEpicSubtaskAndMaxSize() {
+    void addHistoryTaskEpicSubtaskNoRepeatDelete() {
         Task task = new Task("Задача", "Описание");
-        Epic epic = new Epic("Задача", "Описание");
-        Subtask subtask = new Subtask(epic.getId(), "Задача", "Описание");
+        Epic epic = new Epic("Эпик", "Описание эпика");
+        manager.addTask(task);
+        manager.addEpic(epic);
 
-        historyManager.addTask(task);
-        historyManager.addTask(epic);
-        historyManager.addTask(subtask);
+        Subtask subtask = new Subtask(epic.getId(), "Подзадача", "Описание подзадачи");
 
-        final List<Task> history = historyManager.getHistory();
-        Assertions.assertEquals(3, history.size(), "Количество задач не совпадает");
+        manager.addSubtask(subtask);
 
-        Assertions.assertEquals(subtask, history.getLast(), "Задача не в конце списка");
+        manager.getTaskById(task.getId());
+        manager.getTaskById(task.getId());
+        manager.getEpicById(epic.getId());
+        manager.getEpicById(epic.getId());
+        manager.getSubtaskById(subtask.getId());
+        manager.getSubtaskById(subtask.getId());
 
-        for (int i = 0; i < 15; i++) {
-            historyManager.addTask(task);
-        }
-        Assertions.assertEquals(10, historyManager.getHistory().size(), "Список не равен десяти");
+        Assertions.assertEquals(3, manager.getHistory().size(), "Задачи повторяются");
+
+        manager.deleteTaskById(task.getId());
+
+        Assertions.assertEquals(2, manager.getHistory().size(), "Задача не удалена");
+
+        manager.deleteEpicById(epic.getId());
+
+        Assertions.assertEquals(0, manager.getHistory().size(), "Задача не удалена");
+
+
     }
 }
