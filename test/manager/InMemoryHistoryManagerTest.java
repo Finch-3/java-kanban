@@ -40,6 +40,5 @@ class InMemoryHistoryManagerTest {
 
         Assertions.assertEquals(0, manager.getHistory().size(), "Задача не удалена");
 
-
     }
 }
