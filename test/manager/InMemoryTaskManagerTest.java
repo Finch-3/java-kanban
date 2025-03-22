@@ -173,6 +173,7 @@ class InMemoryTaskManagerTest {
         assertEquals(epic.getName(), taskManager.getHistory().get(1).getName(), "Задачи не совпадают");
         assertEquals(subtask.getName(), taskManager.getHistory().get(2).getName(), "Задачи не совпадают");
 
+
         taskManager.updateTask(updateTask);
         taskManager.updateEpic(updateEpic);
         taskManager.updateSubtask(updateSubtask);
